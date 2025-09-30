@@ -1,0 +1,343 @@
+\documentclass{beamer}
+\usepackage{amsfonts,amsmath,oldgerm}
+\usetheme{sintef}
+\usepackage[fontset=fandol,scheme=chinese]{ctex}
+
+\usepackage{physics2,fixdif,derivative}
+\usephysicsmodule{ab,ab.legacy,nabla.legacy,op.legacy,braket,diagmat,xmat,doubleprod}
+
+\makeatletter
+\newcommand\vb{\@ifstar\boldsymbol\mathbf}
+\newcommand\va[1]{\@ifstar{\vec{#1}}{\vec{\mathrm{#1}}}}
+\newcommand\vu[1]{%
+\@ifstar{\hat{\boldsymbol{#1}}}{\hat{\mathbf{#1}}}}
+\makeatother
+
+\newcommand\mqty[1]{\begin{matrix}#1\end{matrix}}
+\newcommand\pmqty[1]{\begin{pmatrix}#1\end{pmatrix}}
+\newcommand{\im}{\mathrm{i}}
+\newcommand{\ex}[1]{\mathrm{e}^{#1}}
+
+\newcommand{\testcolor}[1]{\colorbox{#1}{\textcolor{#1}{test}}~\texttt{#1}}
+
+\usefonttheme[onlymath]{serif}
+
+\titlebackground*{assets/background}
+
+\newcommand{\hrefcol}[2]{\textcolor{cyan}{\href{#1}{#2}}}
+
+\title{报告标题}
+\subtitle{报告副标题}
+%\course{Doctor's Degree in Astrophysics}
+\author{作者1、作者2}
+%\IDnumber{1234567}
+\date{\today}
+
+
+\begin{document}
+\maketitle
+
+
+\footlinecolor{maincolor}
+
+\begin{frame}
+
+这个模板基于 \hrefcol{https://www.overleaf.com/latex/templates/sintef-presentation/jhbhdffczpnx}{SINTEF Presentation}，由 \hrefcol{mailto:federico.zenith@sintef.no}{Federico Zenith} 提供，并衍生自 \hrefcol{https://github.com/TOB-KNPOB/Beamer-LaTeX-Themes}{Beamer-LaTeX-Themes}，由 Liu Qilong 提供。
+
+\vspace{\baselineskip}
+
+WHU风格改编由\hrefcol{https://ryan-gwo.github.io}{Yuze (Ryan) Guo}贡献
+
+\vspace{\baselineskip}
+
+以下您将找到一篇关于如何使用 \LaTeX\ 和 beamer 包制作幻灯片的简要介绍，基于 Federico Zenith 为 \hrefcol{mailto:federico.zenith@sintef.no}{Federico Zenith} 编写的，用于 \hrefcol{https://www.overleaf.com/latex/templates/sintef-presentation/jhbhdffczpnx}{SINTEF 演示}。
+
+\vspace{\baselineskip}
+
+该模板遵循 \hrefcol{https://creativecommons.org/licenses/by-nc/4.0/legalcode}{Creative Commons CC BY 4.0} 许可协议
+
+\end{frame}
+
+\section{简介}
+
+\begin{frame}{武汉大学中文Beamer幻灯片}
+\begin{itemize}
+\item 我们假设您可以使用 \LaTeX；如果您不能，
+\hrefcol{http://en.wikibooks.org/wiki/LaTeX/}{您可以在这里学习}
+\item Beamer 是 \LaTeX 中最流行和最强大的演示文稿文档类之一
+\item Beamer 还有详细的
+\hrefcol{http://www.ctan.org/tex-archive/macros/latex/contrib/beamer/doc/beameruserguide.pdf}{用户手册}
+\item 在这里，我们将仅介绍最基本的功能，以帮助您快速上手
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Beamer vs. PowerPoint}
+与PowerPoint相比，使用\LaTeX 更好，因为：
+\begin{itemize}
+\item 这不是所见即所得，而是所\emph{想}即所得：\\
+您写内容，电脑做排版
+\item 生成一个 \texttt{pdf}：没有字体、公式、程序版本的问题
+\item 更容易保持一致的样式、字体、高亮等
+\item \TeX 中的数学排版是最好的：
+\begin{equation*}
+\im\hbar \pdv*{\Psi(\vb*{r},t)}{t} =
+-\frac{\hbar^2}{2m}\nabla^2\Psi(\vb*{r},t)
++ V(\vb*{r})\Psi(\vb*{r},t)
+\end{equation*}
+
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{开始使用}
+\framesubtitle{选择主题}
+要开始使用\texttt{beamer}，请使用以下前言启动\LaTeX 文档：
+\begin{block}{最小Beamer文档}
+\verb|\documentclass{beamer}|\\
+\verb|\usetheme{sintef}|\\
+\verb|\begin{document}|\\
+\verb|\begin{frame}{Hello, world!}|\\
+\verb|\end{frame}|\\
+\verb|\end{document}|\\
+\end{block}
+\end{frame}
+
+\begin{frame}[fragile]{标题页}
+要设置一个典型的标题页，您需要在前言中调用一些命令：
+\begin{block}{标题页的命令}
+\begin{verbatim}
+\title{示例标题}
+\subtitle{示例副标题}
+\author{作者1, 作者2}
+\date{\today} % 也可以（误用）用于会议名称等。
+\end{verbatim}
+\end{block}
+然后你可以使用 \verb|\maketitle| 生成标题页。
+
+要设置一个 \textbf{背景图像}，请在 \verb|\maketitle| 之前使用 \verb|\titlebackground| 命令；它的唯一参数是图形文件的名称（或路径）。
+
+如果您使用 \textbf{星号版本} \verb|\titlebackground*|，图像将被裁剪为标题幻灯片右侧的分割视图。
+
+\end{frame}
+
+\begin{frame}[fragile]{编写一个简单的幻灯片}
+\framesubtitle{这真的很简单！}
+\begin{itemize}[<+->]
+\item 一张典型的幻灯片有项目符号列表
+\item 这些可以按顺序显示
+\end{itemize}
+\begin{block}{带项目符号列表的页面代码}<+->
+\begin{verbatim}
+\begin{frame}{编写一个简单的幻灯片}
+  \framesubtitle{这真的很简单！}
+  \begin{itemize}[<+->]
+    \item 一张典型的幻灯片有项目符号列表
+    \item 这些可以按顺序显示
+  \end{itemize}\end{frame}
+\end{verbatim}
+\end{block}
+\end{frame}
+
+\section{个性化}
+
+\footlinecolor{sintefyellow}
+\begin{frame}[fragile]{更改幻灯片样式}
+\begin{itemize}
+\item 您可以在前言中使用 \verb|\themecolor{white}|（默认）或 \verb|\themecolor{main}| 选择白色或 \textit{maincolor} \textbf{幻灯片样式}
+      \begin{itemize}
+      \item 您\emph{不应该}在文档中更改这些：Beamer 不喜欢它
+      \item 如果您\emph{真的}必须，您可能需要在幻灯片中添加 
+      \verb|\usebeamercolor[fg]{normal text}|
+      \end{itemize}
+\item 您可以使用 \verb|\footlinecolor{color}| 更改 \textbf{页脚颜色}
+\verb|\footlinecolor{color}|
+      \begin{itemize}
+      \item 将命令 \emph{置于} 新 \verb|frame| 之前
+      \item 有四种“官方”颜色：
+      \testcolor{maincolor}, \testcolor{sintefyellow},
+      \testcolor{sintefgreen}, \testcolor{sintefdarkgreen}
+      \item 默认情况下没有页脚；您可以使用
+      \verb|\footlinecolor{}| 恢复它
+      \item 其它方式可能可以工作，但不保证！
+      \item 不应与\verb|maincolor|主题一起使用！
+      \end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{色块}
+\begin{columns}
+\begin{column}{0.3\textwidth}
+\begin{block}{标准色块}
+这些色块的颜色与页脚协调（在蓝色主题中为灰色）
+\begin{verbatim}
+\begin{block}{标题}
+内容...
+\end{block}
+\end{verbatim}
+\end{block}
+\end{column}
+\begin{column}{0.7\textwidth}
+\begin{colorblock}[black]{sinteflightgreen}{彩色块}
+与左侧的类似，但你可以选择颜色。文本默认为白色，但你可以使用可选参数来设置它。
+\small
+\begin{verbatim}
+\begin{colorblock}[black]{sinteflightgreen}{标题}
+内容...
+\end{colorblock}
+\end{verbatim}
+\end{colorblock}
+色块的“官方”颜色是： \testcolor{sinteflilla}, 
+\testcolor{maincolor}, \testcolor{sintefdarkgreen}, 和 
+\testcolor{sintefyellow}.
+\end{column}
+\end{columns}
+\end{frame}
+
+\footlinecolor{maincolor}
+\begin{frame}[fragile]{使用颜色}
+\begin{itemize}[<alert@2>]
+  \item 您可以使用 \verb|\textcolor{<颜色名称>}{文本}| 命令使用颜色
+  \item 颜色在 \texttt{sintefcolor} 包中定义：
+  \begin{itemize}
+  \item 主要颜色： \testcolor{maincolor} 和它的搭档
+  \testcolor{sintefgrey}
+  \item 三种绿色色调： \testcolor{sinteflightgreen}, 
+  \testcolor{sintefgreen}, \testcolor{sintefdarkgreen}
+  \item 其他颜色： \testcolor{sintefyellow}, \testcolor{sintefred}, 
+        \testcolor{sinteflilla}
+        \begin{itemize}
+        \item 这些可能会有阴影---请参阅 \verb|sintefcolor| 文档或
+        \hrefcol{https://sintef.sharepoint.com/sites/stottetjenester/\%
+        kommunikasjon/grafisk-profil-new/Sider/default.aspx}{SINTEF档案手册}
+        \end{itemize}
+  \end{itemize}
+  \item 不要滥用颜色：\emph{}通常足够
+  \item 使用 \verb|\alert{}| 来引导 \alert{注意力} 到某处
+  \item<2- | alert@2> 如果你过度强调，那就等于没有强调！
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{添加图片}
+\begin{columns}
+\begin{column}{0.7\textwidth}
+添加图片的方式与普通 \LaTeX 中相同：
+\begin{block}{添加图片的代码}
+\begin{verbatim}
+\usepackage{graphicx}
+% ...
+\includegraphics[width=\textwidth]
+{assets/logo_RGB}
+\end{verbatim}
+\end{block}
+\end{column}
+\begin{column}{0.3\textwidth}
+\includegraphics[width=\textwidth]
+{assets/logo_RGB}
+\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}[fragile]{分列}
+分列很简单且常见；
+通常一侧有图片，另一侧有文本：
+\begin{columns}
+\begin{column}{0.6\textwidth}
+这是第一列
+\end{column}
+\begin{column}{0.3\textwidth}
+这是第二列
+\end{column}
+\end{columns}
+\begin{block}{列代码}
+\begin{verbatim}
+\begin{columns}
+    \begin{column}{0.6\textwidth}
+        这是第一列
+    \end{column}
+    \begin{column}{0.3\textwidth}
+        这是第二列
+    \end{column}
+    % 可能有更多！
+\end{columns}
+\end{verbatim}
+\end{block}
+\end{frame}
+
+\begin{chapter}[assets/background_negative]{}{特殊幻灯片}
+\begin{itemize}
+\item 章节幻灯片
+\item 侧图幻灯片
+\end{itemize}
+\end{chapter}
+
+\footlinecolor{sintefred}
+\begin{frame}[fragile]{章节幻灯片}
+\begin{itemize}
+\item 类似于 \verb|frame|，但有更多选项
+\item 以 \verb|\begin{chapter}[<图片>]{<颜色>}{<标题>}| 开头
+\item 图片是可选的，颜色和标题是必需的
+\item 有七种“官方”颜色： \testcolor{maincolor},
+\testcolor{sintefdarkgreen}, \testcolor{sintefgreen}, 
+\testcolor{sinteflightgreen}, \testcolor{sintefred}, \testcolor{sintefyellow}, 
+\testcolor{sinteflilla}.
+      \begin{itemize}
+      \item 奇怪的是，这些比脚注的官方颜色还要多。
+      \item 将后续幻灯片的页脚更改为与章节幻灯片相同的颜色可能仍然是一个不错的选择。你可以选择。
+      \end{itemize}
+\item 否则，\verb|chapter| 的行为与 \verb|frame| 完全相同。
+\end{itemize}
+\end{frame}
+
+\begin{sidepic}{assets/background_alternative}{侧图幻灯片}
+\begin{itemize}
+\item 以 \texttt{$\backslash$begin\{sidepic\}\{<image>\}\{<title>\}} 开头
+\item 否则， \texttt{sidepic} 的行为与 \texttt{frame} 完全相同
+\end{itemize}
+\end{sidepic}
+
+\footlinecolor{maincolor}
+\begin{frame}
+\frametitle{字体}
+\begin{itemize}
+\item 字体的首要任务是可读性
+\item 有好的字体...
+  \begin{itemize}
+  \item {\textrm{Use serif fonts only with high-definition projectors}}
+  \item {\textsf{Use sans-serif fonts otherwise (or if you simply prefer 
+them)}}
+  \end{itemize}
+\item ... 以及一些不那么好的：
+  \begin{itemize}
+  \item {\texttt{Never use monospace for normal text}}
+  \item {\frakfamily Gothic, calligraphic or weird fonts: should always: be
+  avoided}
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{外观}
+\begin{itemize}
+\item 要插入带有标题和最终致谢的结束幻灯片，使用 \verb|\backmatter|。
+      \begin{itemize}
+      \item 标题也会出现在页脚中，连同作者姓名，你可以使用 \verb|\footlinepayoff| 来更改此文本
+      \item 你可以使用 \verb|\backmatter[notitle]| 从最后一张幻灯片中删除标题
+      \end{itemize}
+\item 默认的宽高比为16:9，您不应将其更改为4:3，因为将16:9的演示完美转换为4:3是根本不可能的；间距\emph{将}破坏
+      \begin{itemize}
+      \item \texttt{beamer} 类的 \texttt{aspectratio} 参数被 SINTEF 主题覆盖
+      \item 如果你\emph{真的}知道自己在做什么，请检查软件包代码并查找 \texttt{geometry} 类。
+      \end{itemize}
+\end{itemize}
+\end{frame}
+
+\section{总结}
+
+\begin{frame}
+\frametitle{祝你好运！}
+\begin{itemize}
+\item 这已经足够作为介绍！到目前为止，你应该知道足够多的内容
+\item 如果你有修改或建议，\hrefcol{mailto:guoyuze@whu.edu.cn}{请发送给我！}
+\end{itemize}
+\end{frame}
+
+\backmatter
+\end{document}
