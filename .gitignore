@@ -1,0 +1,15 @@
+*.aux
+*.bbl
+*.blg
+*.log
+*.nav
+*.out
+*.snm
+*.synctex*
+*.toc
+*.vrb
+*.fls
+*.fdb_latexmk
+.DS_Store
+._*
+whu_beamer.pdf
